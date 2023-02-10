@@ -1,24 +1,47 @@
-import React from 'react';
-import logo from './logo.svg';
+import { log } from 'console';
+import { useEffect, useState } from 'react';
 import './App.css';
+import { InputSection } from './components/Inputsection/Inputsection';
+import { ToDoList } from './components/Todolist/Todolist';
+import { ITodo } from './models/ITodo';
+
+
+
+
 
 function App() {
-  return (
+  
+    const [todo, setTodo] = useState<string>("");
+    const [todos, updateTodos] = useState<ITodo[]>([]);
+
+    useEffect(() => {
+      let stringFromLS: string | null = localStorage.getItem("todolist");
+      if(stringFromLS){
+          updateTodos(JSON.parse(stringFromLS));
+      }
+    }, []);
+    const showTodos = (e:React.FormEvent)=> {
+      e.preventDefault();
+      if(todo) {
+        updateTodos([...todos, {id:Date.now(), todo:todo, isDone:false}]);
+        setTodo("");
+      }
+
+    }
+
+
+
+
+    useEffect(() => {
+      localStorage.setItem("todolist", JSON.stringify(todos))
+    }, [todos]);
+
+
+    console.log(todos);
+    return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <InputSection  todo={todo} setTodo = {setTodo} showTodos = {showTodos}/>
+      <ToDoList todos={todos} updateTodos={updateTodos} />
     </div>
   );
 }
