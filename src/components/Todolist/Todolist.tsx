@@ -1,5 +1,6 @@
 import { ITodo } from "../../models/ITodo";
 import { SingleToDo } from "../Singletodo/Singletodo";
+import "./todolist.scss";
 
 interface ITodolistProps {
     todos: ITodo[];
@@ -8,9 +9,9 @@ interface ITodolistProps {
 
 export const ToDoList = ({todos, updateTodos}:ITodolistProps) => {
     return (
-    <div>
-        {todos.map((todo)=>
-        <SingleToDo key = {todo.id} todo={todo} todos={todos} updateTodos={updateTodos}/>
+    <div className="todosContainer">
+        {todos.map((todo, i)=>
+        <SingleToDo  index={i} todo={todo} todos={todos} updateTodos={updateTodos}/>
         )}
     </div>
     )
