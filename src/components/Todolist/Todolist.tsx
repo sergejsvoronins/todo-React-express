@@ -10,8 +10,8 @@ interface ITodolistProps {
 export const ToDoList = ({todos, updateTodos}:ITodolistProps) => {
     return (
     <div className="todosContainer">
-        {todos.map((todo, i)=>
-        <SingleToDo  index={i} todo={todo} todos={todos} updateTodos={updateTodos}/>
+        {todos.map((todo, index)=>
+        <SingleToDo  key={index} index={index} todo={todo} todos={todos} updateTodos={updateTodos}/>
         )}
     </div>
     )

@@ -1,6 +1,7 @@
 import { ITodo } from "../../models/ITodo";
 import { MdOutlineDone, MdDeleteForever } from 'react-icons/md';
 
+
 interface ISingleToDoProps {
     index: number;
     todo: ITodo;
@@ -17,8 +18,12 @@ export const SingleToDo = ({index, todo,todos,updateTodos}:ISingleToDoProps) => 
     }
 
     const handleDone = (i:number) => {
-        console.log("done");
-    }
+        todos.map((item:ITodo)=>
+            // todos.indexOf(item)===i ? item.isDone:true
+            todos.indexOf(item)===i ? {...item, isDone:!item.isDone}: item
+    )
+    console.log(todos);
+    }  
     return <div key={index}>
         {todo.todo}
         <span>

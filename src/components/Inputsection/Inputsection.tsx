@@ -18,7 +18,7 @@ export const InputSection = ({todo, setTodo, todos, updateTodos}: IInputSection)
       }
 
     }
-
+    console.log(todos);
     const handleChange = (e:ChangeEvent<HTMLInputElement>) => {
         setTodo(e.target.value);
     }
