@@ -1,5 +1,6 @@
 import { ITodo } from "../../models/ITodo";
 import { MdOutlineDone, MdDeleteForever } from 'react-icons/md';
+import "./singletodo.scss";
 
 
 interface ISingleToDoProps {
@@ -18,19 +19,20 @@ export const SingleToDo = ({index, todo,todos,updateTodos}:ISingleToDoProps) => 
     }
 
     const handleDone = (i:number) => {
-        todos.map((item:ITodo)=>
-            // todos.indexOf(item)===i ? item.isDone:true
-            todos.indexOf(item)===i ? {...item, isDone:!item.isDone}: item
-    )
-    console.log(todos);
+        updateTodos(todos.map((item:ITodo)=>
+            todos.indexOf(item)===i ? {...item, isDone:!item.isDone}: item));
+        
     }  
-    return <div key={index}>
-        {todo.todo}
-        <span>
-            <MdOutlineDone onClick={()=>{handleDone(index)}}/>
-        </span>
-        <span>
-            <MdDeleteForever onClick={()=>{handleDelete(index)}}/>
-        </span>
-        </div>
+
+    return <div className="todo" key={index}>
+            {!todo.isDone ? (<span className="todo__title">{todo.todo}</span>) : (<s className="todo__title">{todo.todo}</s>)}
+            <div>
+                <span>
+                    <MdOutlineDone onClick={()=>{handleDone(index)}}/>
+                </span>
+                <span>
+                    <MdDeleteForever onClick={()=>{handleDelete(index)}}/>
+                </span>
+            </div>
+    </div>
 }
