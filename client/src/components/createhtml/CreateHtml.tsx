@@ -3,7 +3,8 @@ import { ITodo, ITodoData } from "../../models/ITodo";
 import { InputSection } from "../Inputsection/Inputsection";
 import { ToDoList } from "../Todolist/Todolist";
 import "./CreateHtml.scss";
-import { addTodo, deleteTodo, getTodos, updateTodoStatus } from "../../services/todosService";
+import { addTodo, deleteTodo, getTodos, updateTodoStatus, updateTodoTitle } from "../../services/todosService";
+
 
 export const CreateHtml = () => {
     
@@ -20,6 +21,9 @@ export const CreateHtml = () => {
             setLoading(true);
         }
     });
+    const resetLoading = () => {
+        setLoading(false);
+    }
     const addTask = (task:ITodoData) => {
         addTodo(task);
         setLoading(false);
@@ -28,23 +32,25 @@ export const CreateHtml = () => {
     const deleteTask = (id:number) => {
         deleteTodo(id);
         setLoading(false);
-        // updateTodos(todos.filter((item)=>todos.indexOf(item)!==i));
     }
 
-    const changeTodoStatus = (id:number) => {
-        // updateTodos(todos.map((item:ITodo)=>
-        //     todos.indexOf(item)===IDBCursor ? {...item, isDone:!item.isDone}: item));
-        updateTodoStatus(id);
+    const changeTodoStatus = (todo:ITodo) => {
+        updateTodoStatus(todo);
         setLoading(false);
     } 
+    const changeTodoTitle = (todo:ITodo) => {
+        updateTodoTitle(todo);
+        console.log(todo)
+        setLoading(false);
+    }
 
 
     console.log(todos);
     return (
         <div className="mainContainer">
             <h2>Todo-List</h2>
-            <InputSection addTask={ addTask }/>
-            <ToDoList todos={ todos } deleteTask = { deleteTask } changeTodoStatus = { changeTodoStatus }/>
+            <InputSection addTask={ addTask } resetLoading = { resetLoading } />
+            <ToDoList todos={ todos } deleteTask = { deleteTask } changeTodoStatus = { changeTodoStatus } changeTodoTitle = { changeTodoTitle }/>
         </div>
     )
 }

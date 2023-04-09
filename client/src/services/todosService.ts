@@ -9,16 +9,17 @@ export const getTodos = async () => {
 }
 export const addTodo = async (todo:ITodoData) => {
     let response:AxiosResponse<ITodo> = await axios.post(BASE_URL, todo);
-    console.log(response.status)
     return response.status;
 }
-export const updateTodoStatus = async (id:number) => {
-    let response = await axios.put(`${BASE_URL}/${id}`);
-    console.log(response.status)
+export const updateTodoStatus = async (todo:ITodo) => {
+    let response = await axios.put(BASE_URL, todo);
+    return response.status;
+}
+export const updateTodoTitle = async (todo:ITodo) => {
+    let response = await axios.patch(BASE_URL, todo);
     return response.status;
 }
 export const deleteTodo = async (id:number) => {
     let response = await axios.delete(`${BASE_URL}/${id}`);
-    console.log(response.status)
     return response.status;
 }

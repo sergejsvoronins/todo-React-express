@@ -4,16 +4,12 @@
     margin: 10px auto;
     text-align: start;
     padding: 0 5px;
-    background-color: salmon;
+
     .todo {
         width: 100%;
         display: flex;
         flex-direction: row;
         justify-content: space-between;
-
-        &>span {
-
-        }
         div {
 
             span {
@@ -26,4 +22,7 @@
             }
         }
     }
+     input {
+        border: none;
+     }
 }

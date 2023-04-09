@@ -1,5 +1,5 @@
 import express from "express";
-import { createToDo, getAllTodos, removeTodo, updateTodoStatus } from "../controllers/todoController";
+import { createToDo, getAllTodos, removeTodo, updateTodoStatus, updateTodoTitle } from "../controllers/todoController";
 import { Request, Response } from "express";
 
 
@@ -12,8 +12,11 @@ todoRouter.get("/", (req:Request, res:Response, next) => {
 todoRouter.post("/", (req:Request, res:Response)=>{
     createToDo(req, res);
 })
-todoRouter.put("/:id", (req:Request, res:Response)=>{
+todoRouter.put("/", (req:Request, res:Response)=>{
     updateTodoStatus(req, res);
+})
+todoRouter.patch("/", (req:Request, res:Response)=>{
+    updateTodoTitle(req, res);
 })
 todoRouter.delete("/:id", (req:Request, res:Response)=>{
     removeTodo(req, res);

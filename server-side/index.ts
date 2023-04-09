@@ -2,11 +2,7 @@ import express from "express";
 import { todoRouter } from "./routes/todoRouter";
 import cors  from "cors";
 const app = express();
-app.use(
-    cors({
-      methods: ["GET", "PUT", "DELETE", "POST"],
-    })
-  );
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded())
 

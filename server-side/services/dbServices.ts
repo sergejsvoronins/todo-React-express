@@ -25,13 +25,6 @@ export const getTodos = (callback:any) => {
     `;
     db.all(query,callback);
 }
-// export const getTodoById = (id:string, callback) => {
-//     const query = `
-//         SELECT * FROM todos WHERE id = ?
-//     `;
-//     const values = [id];
-//     db.run(id, callback);
-// }
 export const addTodo = (title:string, is_done:boolean, callback:any) => {
     const query = `
         INSERT INTO todos (title, is_done)
@@ -43,7 +36,7 @@ export const addTodo = (title:string, is_done:boolean, callback:any) => {
     ];
     db.run(query,values, callback);
 }
-export const setTodoStatus = (id:string, callback:any) => {
+export const setTodoStatus = (id:number, callback:any) => {
     const query = `
         UPDATE todos SET is_done = CASE WHEN is_done = 0 THEN 1 ELSE 0 END WHERE id = ?
     `;
@@ -52,7 +45,17 @@ export const setTodoStatus = (id:string, callback:any) => {
     ];
     db.run(query,values, callback);
 }
-export const deleteTodo = (id:string, callback:any) => {
+export const setTodoTitle = (id: number, title:string, callback:any) => {
+    const query = `
+        UPDATE todos SET title = ? WHERE id = ?
+    `;
+    const values = [
+        title,
+        id
+    ];
+    db.run(query,values, callback);
+}
+export const deleteTodo = (id:number, callback:any) => {
     const query = `
         DELETE FROM todos WHERE id=?
     `;
