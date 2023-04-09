@@ -1,24 +1,20 @@
 import { log } from "console";
-import { ChangeEvent } from "react";
-import { ITodo } from "../../models/ITodo";
+import { ChangeEvent, useState } from "react";
+import { ITodo, ITodoData } from "../../models/ITodo";
 import "./inputsection.scss";
 
-interface IInputSection {
-    todo: string;
-    todos: ITodo [];
-    setTodo: React.Dispatch<React.SetStateAction<string>>;
-    updateTodos:React.Dispatch<React.SetStateAction<ITodo[]>>;
+interface IInputSectionProps {
+    addTask(todo:ITodoData): void
 }
-export const InputSection = ({todo, setTodo, todos, updateTodos}: IInputSection) => {
+
+export const InputSection = (props:IInputSectionProps) => {
+    const [todo, setTodo] = useState<string>("");
     const showTodos = (e:React.FormEvent)=> {
-      e.preventDefault();
-      if(todo) {
-        updateTodos([...todos, {todo:todo, isDone:false}]);
-        setTodo("");
-      }
+        e.preventDefault();
+        let newTodo : ITodoData = {title: todo, is_done: 0}
+        props.addTask(newTodo);
 
     }
-    console.log(todos);
     const handleChange = (e:ChangeEvent<HTMLInputElement>) => {
         setTodo(e.target.value);
     }
