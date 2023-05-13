@@ -1,9 +1,10 @@
 import { ChangeEvent, useState } from "react";
 import { ITodo } from "../../models/ITodo";
-
+import "./ChangeTodo.scss";
 interface IChangeTodoProps {
     todo: ITodo,
-    changeTodoTitle(todo:ITodo):void
+    changeTodoTitle(todo:ITodo):void,
+    handleDelete(id: number):void
 }
 
 export const ChangeTodo = (props:IChangeTodoProps) => {
@@ -15,10 +16,10 @@ export const ChangeTodo = (props:IChangeTodoProps) => {
     }
     const handleSubmit = (e:React.FormEvent) => {
         e.preventDefault();
-        props.changeTodoTitle(todo);
+        todo.title === "" ? props.handleDelete(todo.id) : props.changeTodoTitle(todo);
     }
     return (
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} className="editTodo">
             <input type="text" value = {todo.title} onChange={handleChange}/>
         </form>
     )

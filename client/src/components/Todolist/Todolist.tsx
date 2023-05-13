@@ -1,7 +1,6 @@
 import { MdDeleteForever, MdOutlineDone } from "react-icons/md";
 import { ITodo } from "../../models/ITodo";
 import "./todolist.scss";
-import { ChangeEvent } from "react";
 import { ChangeTodo } from "../changetodo/ChangeTodo";
 
 
@@ -24,7 +23,7 @@ export const ToDoList = (props:IToDoListProps) => {
     const createTodoHtml = (todo:ITodo) => {
         return (
             <div className="todo" key={todo.id}>
-                <ChangeTodo todo = { todo } changeTodoTitle = { props.changeTodoTitle }></ChangeTodo>
+                <ChangeTodo todo = { todo } changeTodoTitle = { props.changeTodoTitle } handleDelete = { handleDelete }></ChangeTodo>
                 <div>
                     <span>
                         <MdOutlineDone  onClick={()=>{handleDone(todo)}}/>
