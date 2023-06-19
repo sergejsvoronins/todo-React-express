@@ -40,12 +40,9 @@ export const CreateHtml = () => {
     } 
     const changeTodoTitle = (todo:ITodo) => {
         updateTodoTitle(todo);
-        console.log(todo)
         setLoading(false);
     }
 
-
-    console.log(todos);
     return (
         <div className="mainContainer">
             <h2>Todo-List</h2>
