@@ -1,6 +1,6 @@
 import { log } from "console";
 import { ChangeEvent, useState } from "react";
-import { ITodo, ITodoData } from "../../models/ITodo";
+import { ITodoData } from "../../models/ITodo";
 import "./inputsection.scss";
 
 interface IInputSectionProps {
